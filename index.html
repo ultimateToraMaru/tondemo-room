@@ -23,7 +23,7 @@
         <br>
         <div>
             <h2>ママのつぶやき</h2>
-            <!--#include file="tweet/20240720.html" -->
+            <div id="tweetContainer"></div>
         </div>
         <!-- 
         <div>
@@ -37,5 +37,48 @@
             </div>
         </div>
         -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var files = [
+                './tweet/20240720.html',
+                './tweet/20240721.html',
+                './tweet/20240722.html'
+            ];
+
+            function loadFile(file) {
+                return new Promise(function(resolve, reject) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', file, true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                resolve(xhr.responseText);
+                            } else {
+                                reject('Failed to load file: ' + file);
+                            }
+                        }
+                    };
+                    xhr.send();
+                });
+            }
+
+            function loadAllFiles(files) {
+                var promises = files.map(function(file) {
+                    return loadFile(file);
+                });
+
+                Promise.all(promises).then(function(contents) {
+                    var tweetContainer = document.getElementById('tweetContainer');
+                    contents.forEach(function(content) {
+                        tweetContainer.innerHTML += content;
+                    });
+                }).catch(function(error) {
+                    console.error(error);
+                });
+            }
+
+            loadAllFiles(files);
+        });
+        </script>
 </body>
 </html>
