@@ -18,6 +18,8 @@ class App:
 
         # キャンディの選択状態を管理する変数
         self.selected_candy: Candy = None  # クリックされたキャンディを追跡する変数
+        self.selected_candy_initial_x = 0
+        self.selected_candy_initial_y = 0
         self.selected_candy_offset_x = 0
         self.selected_candy_offset_y = 0
 
@@ -80,8 +82,6 @@ class App:
                 self.selected_candy.size
             )
 
-            print(self.selected_candy.x, self.selected_candy.y)
-
     def draw_cursor(self):
         """カーソルの描画処理
         """
@@ -95,6 +95,10 @@ class App:
         for candy in self.board.candy_cells:
             if candy.x <= x < candy.x + candy.size and candy.y <= y < candy.y + candy.size:
                 self.selected_candy = candy
+
+                self.selected_candy_initial_x = candy.x
+                self.selected_candy_initial_y = candy.y
+
                 self.selected_candy_offset_x = x - candy.x
                 self.selected_candy_offset_y = y - candy.y
                 break
@@ -110,8 +114,8 @@ class App:
                 self.selected_candy.y = self.selected_candy.y // 16 * 16
 
                 # クリックが離されたキャンディをグリッドにスナップさせる
-                candy.x = candy.x // 16 * 16
-                candy.y = candy.y // 16 * 16
+                candy.x = self.selected_candy_initial_x
+                candy.y = self.selected_candy_initial_y
 
                 # 選択中のキャンディとクリックが離されたキャンディを入れ替える
                 self.board.swap(
