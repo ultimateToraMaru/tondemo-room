@@ -15,10 +15,11 @@ class Board:
         for i, cell in enumerate(cells):
             x = i % 10
             y = i // 10
+            size = 16
             candy = Candy(
-                size=16,
-                x=x,
-                y=y,
+                size=size,
+                x=x*size,
+                y=y*size,
                 resource_bank=0,
                 resource_x=cell * 16,
                 resource_y=0,

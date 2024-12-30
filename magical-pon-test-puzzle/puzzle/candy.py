@@ -16,8 +16,8 @@ class Candy:
     def draw(self):
         pyxel.blt(
             # 描画位置
-            self.x * self.size,
-            self.y * self.size,
+            self.x,
+            self.y,
 
             # リソースのバンク
             self.resource_bank,

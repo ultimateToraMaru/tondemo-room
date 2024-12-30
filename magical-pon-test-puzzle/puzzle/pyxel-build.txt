@@ -1,0 +1,3 @@
+pyxel package . app.py
+
+pyxel app2html puzzle.pyxapp
