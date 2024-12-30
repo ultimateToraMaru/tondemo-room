@@ -96,6 +96,7 @@ class App:
             if candy.x <= x < candy.x + candy.size and candy.y <= y < candy.y + candy.size:
                 self.selected_candy = candy
 
+                # 選択中のキャンディの初期位置とオフセットを記録
                 self.selected_candy_initial_x = candy.x
                 self.selected_candy_initial_y = candy.y
 
@@ -110,8 +111,8 @@ class App:
             if candy.x <= x < candy.x + candy.size and candy.y <= y < candy.y + candy.size:
 
                 # 選択中のキャンディをグリッドにスナップさせる
-                self.selected_candy.x = self.selected_candy.x // 16 * 16
-                self.selected_candy.y = self.selected_candy.y // 16 * 16
+                self.selected_candy.x = x // 16 * 16
+                self.selected_candy.y = y // 16 * 16
 
                 # クリックが離されたキャンディをグリッドにスナップさせる
                 candy.x = self.selected_candy_initial_x
@@ -123,6 +124,9 @@ class App:
                     self.board.candy_cells.index(candy))
 
                 self.selected_candy = None
+
+                pyxel.play(0, [0, 1], loop=False)
+
                 break
 
 
