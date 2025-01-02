@@ -107,27 +107,32 @@ class App:
     def on_mouse_up(self, x: int, y: int):
         """マウスのクリックが離されたときの処理"""
 
-        for candy in self.board.candy_cells:
-            if candy.x <= x < candy.x + candy.size and candy.y <= y < candy.y + candy.size:
+        if self.selected_candy:
+            # ドロップ位置を計算
+            new_x = (pyxel.mouse_x // 16) * 16
+            new_y = (pyxel.mouse_y // 16) * 16
 
-                # 選択中のキャンディをグリッドにスナップさせる
-                self.selected_candy.x = x // 16 * 16
-                self.selected_candy.y = y // 16 * 16
+            # ドロップ位置にあるキャンディを特定
+            for candy in self.board.candy_cells:
+                if candy.x == new_x and candy.y == new_y:
 
-                # クリックが離されたキャンディをグリッドにスナップさせる
-                candy.x = self.selected_candy_initial_x
-                candy.y = self.selected_candy_initial_y
+                    self.selected_candy.x = new_x
+                    self.selected_candy.y = new_y
 
-                # 選択中のキャンディとクリックが離されたキャンディを入れ替える
-                self.board.swap(
-                    self.board.candy_cells.index(self.selected_candy),
-                    self.board.candy_cells.index(candy))
+                    # クリックが離されたキャンディをグリッドにスナップさせる
+                    candy.x = self.selected_candy_initial_x
+                    candy.y = self.selected_candy_initial_y
 
-                self.selected_candy = None
+                    # 選択中のキャンディとクリックが離されたキャンディを入れ替える
+                    self.board.swap(
+                        self.board.candy_cells.index(self.selected_candy),
+                        self.board.candy_cells.index(candy))
 
-                pyxel.play(0, [0, 1], loop=False)
+                    self.selected_candy = None
 
-                break
+                    # pyxel.play(0, [0, 1], loop=False)
+
+                    break
 
 
 App()
