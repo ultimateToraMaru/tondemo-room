@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>rain-room</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <!-- 降るテキスト用スタイル（外部化） -->
+    <link rel="stylesheet" href="rain-text.css" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container zen-maru-gothic-regular">
+        <div>
+            <h1>あめのふるへや</h1>
+        </div>
+        <div>
+            <p>「言葉」が雨のように降るでしょう</p>
+        </div>
+    </div>
+    <!-- Rain area: テキストが降る領域 -->
+    <div id="rain-area" aria-hidden="true"></div>
+
+    <!-- 設定パネル（必要ならオンにして試せます） -->
+    <div id="rain-controls">
+        <label>
+            <input id="rain-text-input" value="雨" style="width:80px">
+        </label>
+    </div>
+</body>
+
+<footer>
+</footer>
+
+<script src="rain-text.js"></script>
+
+</html>

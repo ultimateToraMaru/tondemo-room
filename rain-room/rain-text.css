@@ -1,0 +1,44 @@
+/* rain-text.css
+   降るテキスト用のスタイルをまとめたCSS
+*/
+
+#rain-area, .rain-drop {
+    /* Google Fonts の 'Zen Maru Gothic' を優先して使う指定 */
+    font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+}
+
+#rain-area {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.rain-drop {
+    position: absolute;
+    /* 改行を反映するようにする */
+    white-space: pre-wrap;
+    /* 内容に合わせた幅にする（ブロック要素だが幅は自動） */
+    display: inline-block;
+    transform: translateY(-100%);
+    will-change: transform, opacity;
+}
+
+/* 設定パネルの位置・見た目（以前は HTML の inline style にありました） */
+#rain-controls{
+    position: fixed;
+    right: 12px;
+    top: 12px;
+    z-index: 10000;
+}
+#rain-controls label{
+    background: rgba(255,255,255,0.53); /* #fff8 相当 */
+    backdrop-filter: blur(4px);
+    padding: 6px;
+    border-radius: 6px;
+    display: inline-block;
+}
